@@ -92,7 +92,7 @@ You can use tools like [Postman](https://www.postman.com/) or [Insomnia](https:/
 
 6. **Update a Task by a task id**:
     - Endpoint: `PUT /tasks/:id`
-    - Body: `{ "title": "", "description": "", "status": "pending/completed" }`
+    - Body: `{ "title": "Task Title", "description": "Task Title", "status": "pending/completed" }`
     - Requires Auth: Yes (Include the token in the headers)
 
 7. **Delete a Task**:
