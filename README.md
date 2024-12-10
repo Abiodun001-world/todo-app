@@ -71,11 +71,11 @@ You can use tools like [Postman](https://www.postman.com/) or [Insomnia](https:/
 
 1. **User Registration**:
     - Endpoint: `POST /auth/signup`
-    - Body: `{ "email": "test@mail.com", "password": "pass123" }`
+    - Body: `{ "username": "test", "password": "pass123" }`
 
 2. **User Login**:
     - Endpoint: `POST /auth/login`
-    - Body: `{ "email": "test@mail.com", "password": "pass123" }`
+    - Body: `{ "username": "test", "password": "pass123" }`
 
 3. **Create a Task**:
     - Endpoint: `POST /tasks`
