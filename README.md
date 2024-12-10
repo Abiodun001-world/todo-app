@@ -41,7 +41,7 @@ A simple RESTful API for managing tasks with authentication, built using Node.js
 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Abiodun001-world/todo-app
 cd todo-app
 ```
 
