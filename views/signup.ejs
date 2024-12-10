@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    form {
+      display: inline-block;
+      text-align: left;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input {
+      margin-bottom: 15px;
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .container {
+      width: 300px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sign Up</h1>
+  <div class="container">
+    <form action="/auth/signup" method="POST">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username" required>
+      
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="/auth/login">Log In</a></p>
+  </div>
+</body>
+</html>
