@@ -22,8 +22,8 @@ A simple RESTful API for managing tasks with authentication, built using Node.js
 
 | Endpoint     | Method | Description     | Body                                                  | Requires Auth |
 | ------------ | ------ | --------------- | ----------------------------------------------------- | ------------- |
-| /auth/signup | POST   | Register a user | `{ "email": "test@mail.com", "password": "pass123" }` | No            |
-| /auth/login  | POST   | User login      | `{ "email": "test@mail.com", "password": "pass123" }` | No            |
+| /auth/signup | POST   | Register a user | `{ "username": "git", "password": "pass123" }` | No            |
+| /auth/login  | POST   | User login      | `{ "username": "github", "password": "pass123" }` | No            |
 | /auth/logout | POST   | User logout     |                                                       | Yes           |
 
 #### Tasks
