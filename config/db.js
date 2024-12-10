@@ -5,8 +5,6 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 // connect to mongodb
 function connectDB() {
-    mongoose.set("strictQuery", false)
-
     mongoose.connect(MONGODB_URI);
 
     mongoose.connection.on('connected', () => {
