@@ -8,7 +8,7 @@ A simple RESTful API for managing tasks with authentication, built using Node.js
 
 - User authentication (Sign-Up, Login, Logout)
 - Task management (CRUD operations)
-- Status tracking for tasks (pending, completed)
+- Status tracking for tasks (pending, In progress, completed)
 - Middleware for authentication and authorization
 - Error handling for consistent API responses
 - After logging users will automatically be redirected to the dashboard page(All tasks page) they will be able to see their tasks as being created and listed and have the option to add a new task, view all tasks, update a task, and delete a task.
