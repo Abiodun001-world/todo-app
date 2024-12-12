@@ -4,17 +4,17 @@ const jwt = require("jsonwebtoken");
 
 // Render Signup Page
 exports.renderSignup = (req, res) => {
-  res.render("signup");
+  res.render("signup", { error: null, success: null });
 };
 
 // Render Login Page
 exports.renderLogin = (req, res) => {
-  res.render("login");
+  res.render("login", { error: null });
 };
 
 // Generate a JWT Token
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" }); // Token valid for 1 day
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
 
 // User Signup
@@ -24,13 +24,19 @@ exports.signup = async (req, res) => {
 
     // Check for missing fields
     if (!username || !password) {
-      return res.status(400).json({ error: "Username and password are required." });
+      return res.render("signup", { 
+        error: "Username and password are required.", 
+        success: null 
+      });
     }
 
     // Check if user already exists
     const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(400).json({ error: "Username already exists." });
+      return res.render("signup", { 
+        error: "Username already exists.", 
+        success: null 
+      });
     }
 
     // Hash password before saving
@@ -40,47 +46,63 @@ exports.signup = async (req, res) => {
     const newUser = new User({ username, password: hashedPassword });
     await newUser.save();
 
-    res.status(201).json({ message: "User registered successfully." });
+    // Render signup page with success message
+    res.render("signup", { 
+      error: null, 
+      success: "Account created successfully. Please log in." 
+    });
   } catch (err) {
     console.error("Error registering user:", err);
-    res.status(500).json({ error: "Error registering user." });
+    res.render("signup", { 
+      error: "Error registering user.", 
+      success: null 
+    });
   }
 };
-
+   
 // User Login
 exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // Check for missing fields
-    if (!username || !password) {
-      return res.status(400).json({ error: "Username and password are required." });
-    }
-
     // Find user
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(400).json({ error: "Invalid username or password." });
+      return res.render("login", { 
+        error: "Invalid username or password." 
+      });
     }
 
     // Verify password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ error: "Invalid username or password." });
+      return res.render("login", { 
+        error: "Invalid username or password." 
+      });
     }
 
-// Generate token
-const token = generateToken(user._id);
+    // Generate token
+    const token = generateToken(user._id);
 
-res.status(200).json({ message: "Login successful.", token });
+    // Set token in cookie
+    res.cookie('token', token, { 
+      httpOnly: true, 
+   //   secure: process.env.NODE_ENV === 'production',
+      maxAge: 24 * 60 * 60 * 1000 
+    });
+
+    // Redirect to tasks page
+    res.redirect('/tasks');
   } catch (err) {
-console.error("Error logging in user:", err);
-res.status(500).json({ error: "Error logging in user." });
+    console.error("Error logging in user:", err);
+    res.render("login", { 
+      error: "An error occurred during login." 
+    });
   }
 };
 
 // User Logout
 exports.logout = (req, res) => {
   res.clearCookie('token'); 
-  res.status(200).json({ message: "Logout successfully." });
+  res.redirect('/auth/login');
 };

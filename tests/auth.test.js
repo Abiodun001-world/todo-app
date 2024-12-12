@@ -7,7 +7,7 @@ describe('Authentication Tests', () => {
       .post('/auth/signup')
       .send({
         username: 'abiodun',
-        password: 'password123'
+        password: 'password'
       }, 10000); // Increase timeout to 10 seconds
     expect(res.statusCode).toEqual(201);
   });
@@ -17,7 +17,7 @@ describe('Authentication Tests', () => {
       .post('/auth/login')
       .send({
         username: 'abiodun',
-        password: 'password123'
+        password: 'password'
       });
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('token');

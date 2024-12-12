@@ -3,14 +3,34 @@ const User = require("../models/User");
 
 module.exports = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    // Check for token in cookies instead of headers
+    const token = req.cookies.token;
+
+    // If no token, redirect to login
+    if (!token) {
+      return res.redirect('/auth/login');
+    }
+
+    // Verify the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // user information from the decoded token
-    req.user = await User.findById(decoded.id);
+    // Find user and attach to request
+    const user = await User.findById(decoded.id);
+
+    // If no user found, redirect to login
+    if (!user) {
+      return res.redirect('/auth/login');
+    }
+
+    // Attach user to request
+    req.user = user;
 
     next();
   } catch (err) {
-    res.status(401).json({ error: "Unauthorized" });
+    // Clear invalid token
+    res.clearCookie('token');
+    
+    // Redirect to login page
+    res.redirect('/auth/login');
   }
 };

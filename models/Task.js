@@ -17,7 +17,7 @@ const taskSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ['pending', 'completed'], // Only these values allowed
+    enum: ['pending', 'In progress','completed'], // Only these values allowed
     default: 'pending', 
   },
 }, { timestamps: true }); 

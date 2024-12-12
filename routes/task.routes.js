@@ -1,20 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const { renderTask, createTask, updateTask, deleteTask } = require("../controllers/task.controller");
+const methodOverride = require('method-override');
 const taskController = require("../controllers/task.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
 
+// Use method override to support PUT and DELETE methods in forms
+router.use(methodOverride('_method'));
+
 // Render the tasks page
-router.get("/", authMiddleware, renderTask);
+router.get("/", authMiddleware, taskController.renderTask);
 
 // Create a new task
 router.post('/', authMiddleware, taskController.createTask);
-// Get all tasks
-router.get('/:id', authMiddleware, taskController.getAllTask);
-// Get a specific task by id
-router.get('/:id', authMiddleware, taskController.getATaskById);
-// Update the all the task status and the task details
+
+// Update a task
 router.put('/:id', authMiddleware, taskController.updateTask);
-router.delete("/:id", authMiddleware, deleteTask);
+
+// Delete a task
+router.delete("/:id", authMiddleware, taskController.deleteTask);
 
 module.exports = router;

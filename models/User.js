@@ -4,12 +4,9 @@ const bcrypt = require('bcryptjs');
 const UserSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-}, { timestamp: true});
+}, { timestamps: true }); // Corrected 'timestamp' to 'timestamps'
 
-UserSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
+// Removed the pre-save hook that was hashing the password
+// The password hashing will be done in the auth controller
 
 module.exports = mongoose.model('User', UserSchema);

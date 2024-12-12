@@ -5,14 +5,13 @@ describe('Tasks API', () => {
   it('should get all tasks', async () => {
     const res = await request(app)
       .get('/tasks')
-      .set('Authorization', 'Bearer ACCESS_TOKEN'); 
-    expect(res.statusCode).toEqual(200);
+      .set('Authorization', 'Bearer ACCESS_TOKEN');
+    expect(res.statusCode).toEqual(201);
     expect(res.body).toHaveProperty('tasks');
   });
 
   it('should create a new task', async () => {
-    const newTask = { title: 'Test Task', description: 'Test Description' };
-    title: 'Test Task', description: 'Test Description' };
+    const newTask = { title: 'Test Task', description: 'Test Description', status: "pending", "In progress", "completed"};
     const res = await request(app).post('/tasks').send(newTask);
     expect(res.statusCode).toEqual(201);
     expect(res.body).toHaveProperty('task');
@@ -22,7 +21,7 @@ describe('Tasks API', () => {
   it('should get a task by id', async () => {
     const taskId = 1; // Adjust the task ID as needed
     const res = await request(app).get(`/tasks/${taskId}`);
-    expect(res.statusCode).toEqual(200);
+    expect(res.statusCode).toEqual(201);
     expect(res.body).toHaveProperty('task');
   });
 
