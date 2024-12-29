@@ -32,7 +32,7 @@ A simple RESTful API for managing tasks with authentication, built using Node.js
 | Endpoint   | Method | Description         | Body                                                                       | Requires Auth |
 | ---------- | ------ | ------------------- | -------------------------------------------------------------------------- | ------------- |
 | /tasks     | POST   | Create a new task   | `{ "title": "Task Title", "description": "Details", "status": "pending" }` | Yes           |
-| /tasks/:id | PUT    | Update a task       | `{ "title": "", "description": "", "status": "pending/completed" }`        | Yes           |
+| /tasks/:id | PUT    | Update a task       | `{ "title": "", "description": "", "status": "pending/inprogress/completed" }`        | Yes           |
 | /tasks/:id | DELETE | Delete a task       | N/A                                                                        | Yes           |
 
 ### Installation and Setup
@@ -53,9 +53,9 @@ npm install
 Create a `.env` file in the root directory:
 
 ```
-PORT=5000
-MONGO_URI=<Your MongoDB Connection String>
-JWT_SECRET=<Your JWT Secret Key>
+PORT=
+MONGO_URI=
+JWT_SECRET=
 ```
 
 Start the development server:
@@ -97,7 +97,7 @@ You can use tools like [Postman](https://www.postman.com/) or [Insomnia](https:/
 6. **Update a Task by a task id**:
 
    - Endpoint: `PUT /tasks/:id`
-   - Body: `{ "title": "Task Title", "description": "Task Title", "status": "pending/completed" }`
+   - Body: `{ "title": "Task Title", "description": "Task Title", "status": "pending/inprogress/completed" }`
    - Requires Auth: Yes (Include the token in the headers)
 
 7. **Delete a Task**:
