@@ -32,7 +32,7 @@ A simple RESTful API for managing tasks with authentication, built using Node.js
 | Endpoint   | Method | Description         | Body                                                                       | Requires Auth |
 | ---------- | ------ | ------------------- | -------------------------------------------------------------------------- | ------------- |
 | /tasks     | POST   | Create a new task   | `{ "title": "Task Title", "description": "Details", "status": "pending" }` | Yes           |
-| /tasks/:id | PUT    | Update a task       | `{ "title": "", "description": "", "status": "pending/inprogress/completed" }`        | Yes           |
+| /tasks/:id | PUT    | Update a task       | `{ "title": "", "description": "", "status": "pending/In progress/completed" }`        | Yes           |
 | /tasks/:id | DELETE | Delete a task       | N/A                                                                        | Yes           |
 
 ### Installation and Setup
@@ -97,7 +97,7 @@ You can use tools like [Postman](https://www.postman.com/) or [Insomnia](https:/
 6. **Update a Task by a task id**:
 
    - Endpoint: `PUT /tasks/:id`
-   - Body: `{ "title": "Task Title", "description": "Task Title", "status": "pending/inprogress/completed" }`
+   - Body: `{ "title": "Task Title", "description": "Task Title", "status": "pending/In progress/completed" }`
    - Requires Auth: Yes (Include the token in the headers)
 
 7. **Delete a Task**:
